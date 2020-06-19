@@ -1,5 +1,7 @@
 const container: HTMLElement | any = document.getElementById('app')
-const pokemons: number = 100
+const pokemons: number = 500
+let loading: boolean = true
+let content = ''
 
 interface IPokemon {
   id: number
@@ -8,10 +10,20 @@ interface IPokemon {
   type: string
 }
 
-const fetchData = (): void => {
+const fetchData = async (): Promise<void> => {
+  container.innerHTML = '<div class="loader"></div>'
+  let arr: number[] = []
   for (let i = 1; i < pokemons; i++) {
-    getPokemon(i)
+    arr.push(i)
   }
+  await Promise.all(
+    arr.map(
+      (index: number): Promise<any> => {
+        return getPokemon(index)
+      }
+    )
+  )
+  container.innerHTML = content
 }
 
 const getPokemon = async (id: number): Promise<void> => {
@@ -40,7 +52,7 @@ const showPokemon = (pokemon: IPokemon): void => {
       <span class="card--details">${pokemon.type}</span>
     </div>
   `
-  container.innerHTML += output
+  content += output
 }
 
 fetchData()

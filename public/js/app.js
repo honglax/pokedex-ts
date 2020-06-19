@@ -36,12 +36,29 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 var container = document.getElementById('app');
-var pokemons = 100;
-var fetchData = function () {
-    for (var i = 1; i < pokemons; i++) {
-        getPokemon(i);
-    }
-};
+var pokemons = 500;
+var loading = true;
+var content = '';
+var fetchData = function () { return __awaiter(void 0, void 0, void 0, function () {
+    var arr, i;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                container.innerHTML = '<div class="loader"></div>';
+                arr = [];
+                for (i = 1; i < pokemons; i++) {
+                    arr.push(i);
+                }
+                return [4 /*yield*/, Promise.all(arr.map(function (index) {
+                        return getPokemon(index);
+                    }))];
+            case 1:
+                _a.sent();
+                container.innerHTML = content;
+                return [2 /*return*/];
+        }
+    });
+}); };
 var getPokemon = function (id) { return __awaiter(void 0, void 0, void 0, function () {
     var data, pokemon, pokemonType, transformedPokemon;
     return __generator(this, function (_a) {
@@ -68,6 +85,6 @@ var getPokemon = function (id) { return __awaiter(void 0, void 0, void 0, functi
 }); };
 var showPokemon = function (pokemon) {
     var output = "\n    <div class=\"card\">\n      <span class=\"card--id\">#" + pokemon.id + "</span>\n      <img class=\"card--image\" src=" + pokemon.image + " alt=" + pokemon.name + " />\n      <h1 class=\"card--name\">" + pokemon.name + "</h1>\n      <span class=\"card--details\">" + pokemon.type + "</span>\n    </div>\n  ";
-    container.innerHTML += output;
+    content += output;
 };
 fetchData();
