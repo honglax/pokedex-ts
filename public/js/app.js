@@ -37,7 +37,6 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 };
 var container = document.getElementById('app');
 var pokemons = 500;
-var loading = true;
 var content = '';
 var fetchData = function () { return __awaiter(void 0, void 0, void 0, function () {
     var arr, i;

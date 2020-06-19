@@ -1,6 +1,5 @@
 const container: HTMLElement | any = document.getElementById('app')
 const pokemons: number = 500
-let loading: boolean = true
 let content = ''
 
 interface IPokemon {
